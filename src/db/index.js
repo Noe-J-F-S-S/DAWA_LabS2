@@ -1,37 +1,47 @@
-const data = []
+// const data = [
+//   {
+//     id: 1,
+//     name: "Pepe",
+//     last_name: "Perez",
+//   },
+// ];
+const data =[
+]
 
-//Lista todo
-export const findAll=() =>{
-    return data;
+ let ultimoId = 0;
+
+//listar todo
+export const findAll = () => {
+  return data;
 };
-//Buscar por id
-export const findOne=(id)=>{
-    const user = data.find((u) => u.id === Number(id))
-    //RETORNA UN INDEFINIDO
-}
 
-//crear
+//buscar por el id
+export const findOne = (id) => {
+  return data.find((u) => u.id === Number(id));
+};
 
+//agregar producto
 export const store = (user) => {
-    user.id = data.length + 1;  
-    data.push(user)
-}
+  
+  user.id = ultimoId + 1;
+  data.push(user);
+  ultimoId=user.id;
+};
 
-//update
+//Actualizar
+export const update = (id, user) => {
+  const index = data.findIndex((u) => u.id === Number(id));
 
-export const update = (id,user) =>{
-    const index = data.findIndex((u) => u.id === Number(id))
-    data[index] = { 
-        ...data[index],
-        ...user,
-    }
-    data[0]
-}
+  data[index] = {
+    ...data[index],
+    ...user,
+  };
+};
 
 //eliminar
-
 export const remove = (id) => {
-    const users = data.filter((u)=> u.id !== Number(id))
-    data.length = 0;
-    data.push(users)
-}
+  const users = data.filter((u) => u.id !== Number(id));
+
+  data.length = 0;
+  data.push(...users);
+};
